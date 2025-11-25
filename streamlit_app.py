@@ -24,8 +24,6 @@ def scrape_pokemon_stats():
     pokemon_db["Weight (kg)"] = pokemon_db["Weight (kg)"].astype(float)
     
     pokemon_db[['Type 1', 'Type 2']] = pokemon_db['Type'].str.split(' ', expand=True, n=1)
-
-    print(pokemon_db.head())
     
     return pokemon_db.loc[:, ["Image", "Number", "Name", "Type", "Height (m)", "Weight (kg)", "BMI", "Type 1", "Type 2"]]
 
@@ -124,7 +122,7 @@ if chosen_type:
     # Task 6: Filter the dataframe df to include only rows where Type 1 or Type 2 is in chosen_type
     # Paste your code from Part 6 here ============================================================================================================
     
-    filtered_df = df[df["Type 1"].isin(chosen_type) | df["Type 2"].isin(chosen_type)]
+    filtered_df = df.loc[df["Type 1"].isin(chosen_type) | df["Type 2"].isin(chosen_type)]
     
     # =============================================================================================================================================
 
@@ -135,7 +133,7 @@ if chosen_type:
     # - data: pd.DataFrame - The data to be displayed
     # - column_config: dict - A dictionary mapping column names to column configuration objects. Here we use st.column_config.ImageColumn to display the images in the "Image" column. Your argument should be: {"Image": st.column_config.ImageColumn("Image",help="Pokemon Image",width=50)}
     # Enter your code below ========================================================================================================================
-    col1.dataframe(filtered_df["Image", "Number", "Name", "Type", "Height (m)", "Weight (kg)", "BMI"], column_config={
+    col1.dataframe(filtered_df.loc[:, ["Image", "Number", "Name", "Type", "Height (m)", "Weight (kg)", "BMI"]], column_config={
         "Image": st.column_config.ImageColumn(
             "Image",
             help="Pokemon Image",
