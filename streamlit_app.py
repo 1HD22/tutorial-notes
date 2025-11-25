@@ -25,7 +25,7 @@ def scrape_pokemon_stats():
     
     pokemon_db[['Type 1', 'Type 2']] = pokemon_db['Type'].str.split(' ', expand=True, n=1)
 
-	print pokemon_db.head()
+	print(pokemon_db.head())
     
     return pokemon_db.loc[:, ["Image", "Number", "Name", "Type", "Height (m)", "Weight (kg)", "BMI", "Type 1", "Type 2"]]
 
